@@ -42,7 +42,7 @@ def callback(request):
             if isinstance(event, MessageEvent):
                 # get text from line
                 user_utt = event.message.text
-                user_dialogue = Dialogue(text='user: ' + user_utt)
+                user_dialogue = Dialogue(name='user', text=user_utt)
                 user_dialogue.save()
 
                 
@@ -55,7 +55,7 @@ def callback(request):
                     event.reply_token,
                    TextSendMessage(text=bot_utt)
                 )
-                bot_dialogue = Dialogue(text='bot: ' + bot_utt)
+                bot_dialogue = Dialogue(name='bot', text=bot_utt)
                 bot_dialogue.save()
 
         return HttpResponse()
