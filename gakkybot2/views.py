@@ -1,6 +1,12 @@
 # from django.shortcuts import render
 
 # Create your views here.
+import json
+import os
+import requests
+
+import doco.client
+
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
@@ -11,6 +17,8 @@ from linebot.models import MessageEvent, TextSendMessage
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
+docomo_api_key = settings.DOCOMO_API_KEY
+docomo_client = doco.client.Client(apikey=docomo_api_key)
 
 @csrf_exempt
 def callback(request):
@@ -28,9 +36,17 @@ def callback(request):
 
         for event in events:
             if isinstance(event, MessageEvent):
+                # get text from line
+                text = event.message.text
+                
+                # send to docomo api
+                user_utt = event['message']['text']
+                docomo_res = docomo_client.send(
+                    utt=user_utt, apiname='Dialogue')
+
                 line_bot_api.reply_message(
                     event.reply_token,
-                   TextSendMessage(text=event.message.text)
+                   TextSendMessage(text=docomo_res['utt'])
                 )
         return HttpResponse()
     else:
