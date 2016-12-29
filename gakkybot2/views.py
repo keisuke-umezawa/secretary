@@ -37,10 +37,9 @@ def callback(request):
         for event in events:
             if isinstance(event, MessageEvent):
                 # get text from line
-                text = event.message.text
+                user_utt = event.message.text
                 
                 # send to docomo api
-                user_utt = event['message']['text']
                 docomo_res = docomo_client.send(
                     utt=user_utt, apiname='Dialogue')
 
