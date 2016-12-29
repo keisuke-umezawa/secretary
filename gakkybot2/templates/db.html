@@ -1,0 +1,21 @@
+{% load staticfiles %}
+
+{% block content %}
+  <div class="container">
+
+
+<h2>Page View Report</h2>
+
+
+<ul>
+
+{% for dialogue in dialogues %}
+    <li>{{ dialogue.user_name }}</li>
+    <li>{{ dialogue.text }}</li>
+{% endfor %}
+
+</ul>
+
+</div>
+
+{% endblock %}
