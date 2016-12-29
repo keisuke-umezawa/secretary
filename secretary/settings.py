@@ -124,3 +124,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
