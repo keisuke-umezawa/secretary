@@ -1,0 +1,8 @@
+{
+  "name": "Secretary: Python",
+  "description": "Bot.",
+  "image": "heroku/python",
+  "repository": "https://github.com/keisuke-umezawa/secretary",
+  "keywords": ["python", "django" ],
+  "addons": [ "heroku-postgresql" ]
+}
