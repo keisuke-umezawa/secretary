@@ -17,8 +17,8 @@ class Migration(migrations.Migration):
             name='Dialogue',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=10)),
-                ('name', models.CharField(max_length=500)),
+                ('user_name', models.CharField(max_length=10)),
+                ('text', models.CharField(max_length=500)),
             ],
         ),
     ]
